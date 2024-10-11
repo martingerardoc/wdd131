@@ -11,9 +11,15 @@ const lastModifiedElement = document.getElementById("lastModified");
 lastModifiedElement.textContent = "Last Modification: " + document.lastModified;
 
 // Add a click event listender to the hamburger button and use a callback function that toggles the list element's list of classes.
-hambutton.addEventListener('click', () => {
-	mainnav.classList.toggle('show');
-	hambutton.classList.toggle('show');
+// Responsive hamburger menu
+const hamButton = document.querySelector("#menu");
+const navigation = document.querySelector(".navigation");
+const headerTitle = document.querySelector("header h1");
+
+hamButton.addEventListener("click", () => {
+  navigation.classList.toggle("open");
+  hamButton.classList.toggle("open");
+  headerTitle.classList.toggle("hide");
 });
 
 const temples = [
@@ -97,20 +103,40 @@ const temples = [
     }
   ];
   
-  // Function to generate temple cards
-  const templeContainer = document.getElementById('templeContainer');
-  
-  temples.forEach(temple => {
-      const card = document.createElement('div');
-      card.className = 'temple-card';
-  
-      card.innerHTML = `
-          <img src="${temple.imageUrl}" alt="${temple.templeName}" loading="lazy">
-          <h2>${temple.templeName}</h2>
-          <p><strong>Location:</strong> ${temple.location}</p>
-          <p><strong>Dedicated:</strong> ${temple.dedicated}</p>
-          <p><strong>Area:</strong> ${temple.area} square feet</p>
-      `;
-  
-      templeContainer.appendChild(card);
+
+  createTempleCard(temples);
+  const nonutahLink = document.querySelector("#nonutah");
+  nonutahLink.addEventListener("click", ()=>{
+    event.preventDefault();
+    createTempleCard(temples.filter(temple => !temple.location.toLowerCase().includes("Utah")));
   });
+
+
+function createTempleCard(filteredTemples) {
+  document.querySelector(".temple-grid").innerHTML="";
+  filteredTemples.forEach(temple => {
+    let card = document.createElement("section");
+    let name = document.createElement("h3");
+    let location = document.createElement("p");
+    let dedication = document.createElement("p");
+    let area = document.createElement("p");
+    let img = document.createElement("img");
+
+    name.textContent = temple.templeName;
+    location.innerHTML = `<span class="label">Location: </span> ${temple.location}`;
+    dedication.innerHTML = `<span class="label">Dedicated: </span> ${temple.dedicated}`;
+    area.innerHTML = `<span class="label">Size: </span> ${temple.area} sq ft`;
+    
+    img.setAttribute("src", temple.imageUrl);
+    img.setAttribute("alt", `${temple.templeName} Temple`);
+    img.setAttribute("loading", "lazy");
+
+    card.appendChild(name);
+    card.appendChild(location);
+    card.appendChild(dedication);
+    card.appendChild(area);
+    card.appendChild(img);
+
+    document.querySelector(".temple-grid").appendChild(card);
+  })};
+

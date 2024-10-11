@@ -7,36 +7,27 @@
     <meta name="Description" content="Temple Album.">
     <meta name="author" content="Cespedes Martin" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="styles/temples.css">
-    <link rel="stylesheet" href="styles/temples-large.css">
+    <link rel="stylesheet" href="styles/filtered-temples.css">
+    <link rel="stylesheet" href="styles/filtered-temples-large.css">
     <title>WDD 131 - temples</title>
 </head>
 <body>
     <header>
-        <!-- Navbar -->
-        <a id="menu" href="#"></a>
-            <nav>
-                <ul class="navigation"> 
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#">Old</a></li>
-                    <li><a href="#">New</a></li>
-                    <li><a href="#">Large</a></li>
-                    <li><a href="#">Small</a></li>
-                </ul>
-            </nav>
+        <h1>Temple Album</h1>
+        <button id="menu"></button>
+        <nav class="navigation">
+            <a href="#" class="active">Home</a>
+            <a href="#" id= "nonutah">non Utah</a>
+            <a href="#">New</a>
+            <a href="#">Large</a>
+            <a href="#">Small</a>
+        </nav>
     </header>
-    
-    
     <!-- Main Content -->
     <main>
         <h1>Temple Album</h1>
-        <section class="gallery">
-            
-            <h2>Section 1</h2>
-            <div id="templeContainer" class="temple-container"></div>
-            
-        </section>
-        
+        <h2>Section 1</h2>
+        <div class="temple-grid"></div>
     </main>
 
     <!-- Footer -->
