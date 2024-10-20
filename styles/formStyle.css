@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+select, input[type="date"], input[type="text"], textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.rating label {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+textarea {
+    height: 100px;
+}
+
+input[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+}
