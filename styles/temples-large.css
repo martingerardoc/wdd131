@@ -1,0 +1,41 @@
+/* Responsive Styles */
+@media only screen and (min-width: 40em) {
+	nav ul {
+		display: flex !important; /* Forçar a exibição em visualizações maiores */
+		flex-direction: row !important;
+		gap: 20px;
+		justify-content: center;
+		max-width: 640px;
+		margin: 1rem auto;
+		align-items: center;
+	  }
+	.navigation {
+		display: flex;
+	}
+	.navigation li {
+		display: block; /* change state in small view */
+		flex: 1 1 100%;
+	}
+	.navigation a {
+		text-align: center;
+	}
+	#menu {
+		display: none;
+	}
+    
+    main {
+		max-width: 1200px;
+		margin: auto;
+	  }
+	
+	  figure {
+		display: inline-block;
+		width: 30%;
+		margin: 1.5%;
+	  }
+	
+	  img {
+		width: 100%;
+	  }
+
+}
