@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WDD 131 - Dynamic Web Fundamentals - Cespedes Martin. Argentina country."/>
+    <meta name="Description" content="Argentina country">
+    <meta name="author" content="Cespedes Martin" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>WDD 131 - Argentina country</title>
+    <!-- Enlace al archivo CSS -->
+    <link rel="stylesheet" href="styles/argentina.css">
+</head>
+<body>
+
+<header>
+    <h1>ARGENTINA</h1>
+</header>
+<main></main>
+
+<div class="container">
+    <!-- Sección de Imagen -->
+    <div class="image-section">
+        <img src="images/Argentina.webp" alt="Imagen de ejemplo">
+    </div>
+
+    <!-- Sección de Datos -->
+    <div class="data-section">
+        <!-- Caja de Datos 1 -->
+        <div class="data-box">
+            <h2>Data</h2>
+            <label>Area:2,780,400 square kilometers</label>
+            <label>Population:47 million people</label>
+            <label>Capital:Buenos Aires</label>
+            <label>Languajes:Spanish</label>
+            <label>Currency:Peso</label>
+            <label>Time Zone:UTC -3</label>
+            <label>Calling Code:+54</label>
+            
+        </div>
+
+        <!-- Caja de Datos 2 -->
+        <div class="data-box">
+            <section id="weather">
+                <h2>Weather Information</h2>
+                <p>Temperature: <span id="temperature">10°C</span></p>
+                <p>Wind Speed: <span id="windspeed">15 km/h</span></p>
+                <p>Wind Chill Factor: <span id="windchill">Calculating...</span></p>
+            </section>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer contenteditable>
+    <p>&copy; <span id="currentyear"></span> Martin Cespedes. Argentina, Buenos Aires.</p>
+    <p id="lastModified"></p>
+  </footer>
+
+<script src="/week03/scripts/script.js"></script>
+
+</body>
+</html>
