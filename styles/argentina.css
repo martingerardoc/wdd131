@@ -30,6 +30,11 @@ header {
     align-items: center;
     position: relative;
 }
+.hero {
+    text-align: center;
+    max-width: 840px;
+    margin: 0 auto;
+  }
 
 .image-section {
     text-align: center;
