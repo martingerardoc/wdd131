@@ -5,6 +5,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     height: 100vh;
+    background-color: var(--primary-color);
 }
 
 header {
@@ -55,6 +56,11 @@ header {
     margin-bottom: 10px;
     font-weight: bold;
 }
+:root {
+    --primary-color: blue;
+    --secondary-color: green;
+}
+
 
 footer {
     background-color: #4CAF50;
