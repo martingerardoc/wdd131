@@ -2,7 +2,11 @@
 :root {
     --primary-color: #436de1; 
     --secondary-color: #65d0b4; 
-
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
 /* Estilos globales */
 body {
