@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WDD 131 - Dynamic Web Fundamentals - Cespedes Martin. Temples page."/>
+    <meta name="Description" content="Temple Album.">
+    <meta name="author" content="Cespedes Martin" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="styles/site.css">
+    <link rel="stylesheet" href="styles/site-large.css">
+
+    <title>EliteFootball</title>
+</head>
+<body>
+    <header>
+        <h1>Teams</h1>
+        <button id="menu"></button>
+        <nav class="navigation">
+            <a href="mainsite.html">Home</a>
+            <a href="teams.html">Teams</a>
+            <a href="#">New</a>
+            <a href="#">Large</a>
+            <a href="#">Small</a>
+        </nav>
+    </header>
+    <!-- Main Content -->
+    <main>
+        <h1>🏆 Champions League</h1>
+            <div class="tree-container">
+                <div id="round-1-left" class="round"></div>
+                <div id="round-2-left" class="round"></div>
+                <div id="semis-left" class="round"></div>
+                <div id="final" class="round final-round"></div>
+                <div id="semis-right" class="round"></div>
+                <div id="round-2-right" class="round"></div>
+                <div id="round-1-right" class="round"></div>
+            </div>
+  
+            <div id="champion"></div>
+    </main>
+    <!-- Footer -->
+    <footer contenteditable>
+        <p>&copy; <span id="currentyear"></span> Martin Cespedes. Argentina, Buenos Aires.</p>
+        <p id="lastModified"></p>
+      </footer>
+
+    <script src="../project/scripts/teams.js" defer></script>
+</body>
+</html>
