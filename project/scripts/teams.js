@@ -23,126 +23,205 @@ hamButton.addEventListener("click", () => {
 });
 
 const teams = [
-    "Real Madrid", "Bayern", "Man City", "PSG",
-    "Liverpool", "Barcelona", "Chelsea", "Juventus",
-    "Inter", "Napoli", "Atletico", "Arsenal",
-    "Dortmund", "Milan", "Benfica", "Ajax"
-  ];
-  
-  let leftBracket = teams.slice(0, 8);
-  let rightBracket = teams.slice(8, 16);
-  
-  const leftContainer = document.getElementById("left-bracket");
-  const rightContainer = document.getElementById("right-bracket");
-  const finalMatch = document.getElementById("final-match");
-  const winnerDiv = document.getElementById("winner");
-  
-  function createMatches(container, teams, round, side) {
-    container.innerHTML = `<h2>${round}</h2>`;
-    for (let i = 0; i < teams.length; i += 2) {
-      const match = document.createElement("div");
-      match.classList.add("match");
-      
-      const teamA = teams[i];
-      const teamB = teams[i + 1];
-      const matchId = `${side}-${i}`;
-  
-      match.innerHTML = `
-        <strong>${teamA}</strong>
-        <input type="number" id="${matchId}-a" placeholder="Goles" min="0">
-        vs 
-        <input type="number" id="${matchId}-b" placeholder="Goles" min="0">
-        <strong>${teamB}</strong>
-        <button onclick="submitResult('${side}', '${teamA}', '${teamB}', '${matchId}')">Enviar</button>
-      `;
-      container.appendChild(match);
-    }
+  "Real Madrid", "Bayern", "Man City", "PSG",
+  "Liverpool", "Barcelona", "Chelsea", "Juventus",
+  "Inter", "Napoli", "Atletico", "Arsenal",
+  "Dortmund", "Milan", "Benfica", "Ajax"
+];
+
+const resultados = {
+  "round-1-left": [
+    [2, 1],
+    [1, 3],
+    [2, 0],
+    [1, 0] // suponemos que gana Chelsea
+  ],
+  "round-1-right": [
+    [3, 1],
+    [1, 2],
+    [0, 1],
+    [4, 2]
+  ],
+  "round-2-left": [
+    [2, 1], // Real Madrid vs PSG
+    [1, 1]  // Liverpool vs Chelsea (gana Chelsea por penales)
+  ],
+  "round-2-right": [
+    [2, 0],
+    [3, 2]
+  ],
+  "semis-left": [
+    [3, 1] // Real Madrid vs Chelsea
+  ],
+  "semis-right": [
+    [2, 2] // Inter vs Benfica (gana Benfica)
+  ],
+  "final": [
+    [1, 2] // Real Madrid vs Benfica → gana Benfica
+  ]
+};
+
+const rounds = {
+  "round-1-left": teams.slice(0, 8),
+  "round-1-right": teams.slice(8, 16)
+};
+
+const nextRounds = {
+  "round-1-left": "round-2-left",
+  "round-2-left": "semis-left",
+  "semis-left": "final",
+  "round-1-right": "round-2-right",
+  "round-2-right": "semis-right",
+  "semis-right": "final"
+};
+
+let roundWinners = {
+  "round-1-left": [],
+  "round-2-left": [],
+  "semis-left": [],
+  "round-1-right": [],
+  "round-2-right": [],
+  "semis-right": [],
+  "final": []
+};
+
+function simulateRound(roundName) {
+  const equipos = rounds[roundName];
+  const resultadosRound = resultados[roundName];
+  const ganadores = [];
+
+  const container = document.getElementById(roundName);
+  container.innerHTML = "";
+
+  for (let i = 0; i < equipos.length; i += 2) {
+    const teamA = equipos[i];
+    const teamB = equipos[i + 1];
+    const [golesA, golesB] = resultadosRound[i / 2];
+
+    const ganador = golesA > golesB ? teamA : teamB;
+    ganadores.push(ganador);
+
+    const match = document.createElement("div");
+    match.classList.add("match");
+    match.innerHTML = `
+      <div><strong>${teamA}</strong> ${golesA}</div>
+      <div><strong>${teamB}</strong> ${golesB}</div>
+      <div>Ganador: <strong>${ganador}</strong></div>
+    `;
+    container.appendChild(match);
   }
-  
-  let leftWinners = [];
-  let rightWinners = [];
-  
-  function submitResult(side, teamA, teamB, matchId) {
-    const scoreA = parseInt(document.getElementById(`${matchId}-a`).value);
-    const scoreB = parseInt(document.getElementById(`${matchId}-b`).value);
-  
-    if (isNaN(scoreA) || isNaN(scoreB)) {
-      alert("Por favor ingresa ambos resultados");
-      return;
-    }
-  
-    let winner;
-    if (scoreA > scoreB) {
-      winner = teamA;
-    } else if (scoreB > scoreA) {
-      winner = teamB;
-    } else {
-      alert("Empate detectado. Define un ganador (puedes usar penales o repetir).");
-      return;
-    }
-  
-    nextRound(side, winner);
+
+  const next = nextRounds[roundName];
+  if (next) {
+    rounds[next] = ganadores;
+    simulateRound(next);
+  } else {
+    // final jugada
+    document.getElementById("champion").innerHTML = `🏆 Campeón: <strong>${ganadores[0]}</strong>`;
   }
-  
-  function nextRound(side, winner) {
-    if (side === "left") {
-      leftWinners.push(winner);
-      if (leftWinners.length === leftBracket.length / 2) {
-        if (leftWinners.length > 1) {
-          leftBracket = leftWinners;
-          leftWinners = [];
-          createMatches(leftContainer, leftBracket, "Siguiente Ronda", "left");
-        } else {
-          checkFinalists();
-        }
-      }
-    } else {
-      rightWinners.push(winner);
-      if (rightWinners.length === rightBracket.length / 2) {
-        if (rightWinners.length > 1) {
-          rightBracket = rightWinners;
-          rightWinners = [];
-          createMatches(rightContainer, rightBracket, "Siguiente Ronda", "right");
-        } else {
-          checkFinalists();
-        }
-      }
-    }
+}
+
+simulateRound("round-1-left");
+simulateRound("round-1-right");
+
+const equipos = [
+  "River", "Boca", "Man City", "PSG",
+  "Liverpool", "Barcelona", "Chelsea", "Juventus",
+  "Inter", "Napoli", "Atletico", "Arsenal",
+  "Dortmund", "Milan", "Benfica", "Ajax"
+];
+
+const results = {
+  "round-1-left": [
+    [2, 1],
+    [1, 3],
+    [2, 0],
+    [1, 0] // suponemos que gana Chelsea
+  ],
+  "round-1-right": [
+    [3, 1],
+    [1, 2],
+    [0, 1],
+    [4, 2]
+  ],
+  "round-2-left": [
+    [2, 1], // Real Madrid vs PSG
+    [1, 1]  // Liverpool vs Chelsea (gana Chelsea por penales)
+  ],
+  "round-2-right": [
+    [2, 0],
+    [3, 2]
+  ],
+  "semis-left": [
+    [3, 1] // Real Madrid vs Chelsea
+  ],
+  "semis-right": [
+    [2, 2] // Inter vs Benfica (gana Benfica)
+  ],
+  "final": [
+    [1, 2] // Real Madrid vs Benfica → gana Benfica
+  ]
+};
+
+const round = {
+  "round-1-left": teams.slice(0, 8),
+  "round-1-right": teams.slice(8, 16)
+};
+
+const nextRound = {
+  "round-1-left": "round-2-left",
+  "round-2-left": "semis-left",
+  "semis-left": "final",
+  "round-1-right": "round-2-right",
+  "round-2-right": "semis-right",
+  "semis-right": "final"
+};
+
+let roundWinner = {
+  "round-1-left": [],
+  "round-2-left": [],
+  "semis-left": [],
+  "round-1-right": [],
+  "round-2-right": [],
+  "semis-right": [],
+  "final": []
+};
+
+function simulateRound(roundName) {
+  const equipos = rounds[roundName];
+  const resultadosRound = resultados[roundName];
+  const ganadores = [];
+
+  const container = document.getElementById(roundName);
+  container.innerHTML = "";
+
+  for (let i = 0; i < equipos.length; i += 2) {
+    const teamA = equipos[i];
+    const teamB = equipos[i + 1];
+    const [golesA, golesB] = resultadosRound[i / 2];
+
+    const ganador = golesA > golesB ? teamA : teamB;
+    ganadores.push(ganador);
+
+    const match = document.createElement("div");
+    match.classList.add("match");
+    match.innerHTML = `
+      <div><strong>${teamA}</strong> ${golesA}</div>
+      <div><strong>${teamB}</strong> ${golesB}</div>
+      <div>Ganador: <strong>${ganador}</strong></div>
+    `;
+    container.appendChild(match);
   }
-  
-  function checkFinalists() {
-    if (leftBracket.length === 1 && rightBracket.length === 1) {
-      const teamA = leftBracket[0];
-      const teamB = rightBracket[0];
-      finalMatch.innerHTML = `
-        <strong>${teamA}</strong>
-        <input type="number" id="final-a" placeholder="Goles" min="0">
-        vs 
-        <input type="number" id="final-b" placeholder="Goles" min="0">
-        <strong>${teamB}</strong>
-        <button onclick="decideFinal('${teamA}', '${teamB}')">Enviar</button>
-      `;
-    }
+
+  const next = nextRounds[roundName];
+  if (next) {
+    rounds[next] = ganadores;
+    simulateRound(next);
+  } else {
+    // final jugada
+    document.getElementById("champion").innerHTML = `🏆 Campeón: <strong>${ganadores[0]}</strong>`;
   }
-  
-  function decideFinal(teamA, teamB) {
-    const scoreA = parseInt(document.getElementById("final-a").value);
-    const scoreB = parseInt(document.getElementById("final-b").value);
-  
-    if (isNaN(scoreA) || isNaN(scoreB)) {
-      alert("Por favor ingresa ambos resultados");
-      return;
-    }
-  
-    if (scoreA === scoreB) {
-      alert("Empate en la final. Define un ganador.");
-      return;
-    }
-  
-    const winner = scoreA > scoreB ? teamA : teamB;
-    winnerDiv.innerHTML = `<h3>🏆 Campeón: ${winner} 🏆</h3>`;
-  }
-  
-  // Iniciar primeras rondas
-  createMatches(leftContainer, leftBracket, "Llave Izquierda", "left");
-  createMatches(rightContainer, rightBracket, "Llave Derecha", "right");
+}
+
+simulateRound("round-1-left");
+simulateRound("round-1-right");

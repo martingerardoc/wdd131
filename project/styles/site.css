@@ -4,6 +4,15 @@
     padding: 0;
     box-sizing: border-box;
 }
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #0077cc;
+    background: linear-gradient(135deg, #0a0f2c, #0077cc);
+    color: #ffffff;
+    margin: 0;
+    padding: 20px;
+    overflow-x: hidden;
+  }
 
 header {
     background-color:#3c99f5;
@@ -13,7 +22,53 @@ header {
     justify-content: space-between;
     align-items: center;
 }
+/* Contenedor del árbol con scroll horizontal si es necesario */
+.tree-container {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
 
+   /* Cada columna (ronda) */
+   .round {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 220px;
+    flex-shrink: 0;
+  }
+  
+  /* Estilos visuales para cada partido */
+  .match {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid #f6c90e;
+    border-radius: 12px;
+    padding: 10px;
+    width: 100%;
+    box-shadow: 0 0 8px rgba(246, 201, 14, 0.3);
+    text-align: left;
+  }
+  
+  /* Ronda final resaltada */
+  .final-round {
+    background-color: #ffffff22;
+    border: 2px solid gold;
+    border-radius: 15px;
+    padding: 15px;
+  }
+  
+  #champion {
+    margin-top: 30px;
+    font-size: 26px;
+    color: #00ffcc;
+    text-shadow: 1px 1px 4px #000;
+  }
 h1 {
     font-size: 1.5rem;
     margin-left: 0;

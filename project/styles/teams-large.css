@@ -51,7 +51,7 @@
     h2 {
         font-size: 2rem;
     }
-    main .temple-grid{
+    main .temple-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;

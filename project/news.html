@@ -14,35 +14,46 @@
 </head>
 <body>
     <header>
-        <h1>Teams</h1>
+        <h1>News</h1>
         <button id="menu"></button>
         <nav class="navigation">
             <a href="mainsite.html">Home</a>
-            <a href="teams.html">Teams</a>
-            <a href="news.html">News</a>
+            <a href="teams.html">teams</a>
         </nav>
     </header>
     <!-- Main Content -->
     <main>
-        <h1>🏆 Champions League</h1>
-            <div class="tree-container">
-                <div id="round-1-left" class="round"></div>
-                <div id="round-2-left" class="round"></div>
-                <div id="semis-left" class="round"></div>
-                <div id="final" class="round final-round"></div>
-                <div id="semis-right" class="round"></div>
-                <div id="round-2-right" class="round"></div>
-                <div id="round-1-right" class="round"></div>
-            </div>
-  
-            <div id="champion"></div>
+        <h2>UEFA Champions League - Table Positions</h2>
+
+        <div style="width:100%; height:650px; overflow:auto;">
+            <iframe 
+                src="https://www.90min.com/leagues/champions-league/group-tables" 
+                width="800" 
+                height="650" 
+                style="border:none; overflow:hidden;" 
+                scrolling="yes">
+            </iframe>
+        </div>
+        <h2>Copa Libertadores - Positions</h2>
+        <div style="width:100%; height:650px; overflow:auto;">
+            <iframe 
+                src="https://www.365scores.com/es/football/league/libertadores-102/standings" 
+                width="800" 
+                height="650" 
+                style="border:none; overflow:hidden;" 
+                scrolling="yes">
+            </iframe>
+        </div>
+
+
     </main>
+
     <!-- Footer -->
     <footer contenteditable>
         <p>&copy; <span id="currentyear"></span> Martin Cespedes. Argentina, Buenos Aires.</p>
         <p id="lastModified"></p>
       </footer>
 
-    <script src="../project/scripts/teams.js" defer></script>
+    <script src="scripts/site.js" defer></script>
 </body>
 </html>
